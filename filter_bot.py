@@ -20,9 +20,12 @@ async def is_admin(update, context):
 
 
 async def filter_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not update.message:
+        return
+
     message = update.message
 
-    if not message or not message.text:
+    if not message.text:
         return
 
     # админы не фильтруются
