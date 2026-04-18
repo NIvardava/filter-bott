@@ -50,7 +50,7 @@ async def filter_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     print("DELETE ERROR:", e)
                 return
 
-        if re.search(r"\b\d{16}\b", message.text):
+        if re.search(r"(?:\d[\s-]*){16}", message.text):
             try:
                 await message.delete()
             except Exception as e:
