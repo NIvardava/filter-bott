@@ -37,8 +37,6 @@ async def filter_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text_lower = message.text.lower()
 
         banned = [
-            "сбор", "донат", "перевод", "карта",
-            "qiwi", "paypal", "usdt", "btc",
             "http://", "https://", "t.me/"
         ]
 
