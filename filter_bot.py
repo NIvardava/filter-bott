@@ -8,6 +8,7 @@ logging.basicConfig(level=logging.INFO)
 
 # 🔑 ВАЖНО: токен теперь берётся из Railway Variables
 TOKEN = os.getenv("8602440281:AAFVx5FZz81YxYgEw-rinPZEZKGQeuhlbzM")
+print("TOKEN DEBUG:", repr(TOKEN))
 
 
 async def is_admin(update, context):
