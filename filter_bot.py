@@ -26,8 +26,16 @@ async def filter_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     # админы не фильтруются
-    if await is_admin(update, context):
-        return
+    async def is_admin(update, context):
+    try:
+        chat = update.effective_chat
+        user_id = update.effective_user.id
+
+        member = await context.bot.get_chat_member(chat.id, user_id)
+        return member.status in ("administrator", "creator")
+    except Exception as e:
+        print("ADMIN ERROR:", e)
+        return False
 
     text_lower = message.text.lower()
 
@@ -38,12 +46,18 @@ async def filter_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
 
     for word in banned:
-        if word in text_lower:
+    if word in text_lower:
+        try:
             await message.delete()
-            return
+        except Exception as e:
+            print("DELETE ERROR (banned):", e)
+        return
 
-    if re.search(r"\b\d{16}\b", message.text):
-        await message.delete()
+    if re.search(r"\b\d{16}\b", message.text) or re.search(r"\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b", message.text):
+        try:
+            await message.delete()
+        except Exception as e:
+            print("DELETE ERROR (card):", e)
         return
 
 
