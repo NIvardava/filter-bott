@@ -6,7 +6,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filte
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = os.getenv("8602440281:AAFVx5FZz81YxYgEw-rinPZEZKGQeuhlbzM")
+TOKEN = os.getenv("TOKEN")
 
 
 async def is_admin(update, context):
